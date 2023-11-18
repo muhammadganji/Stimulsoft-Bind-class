@@ -23,7 +23,7 @@ namespace Stimulsoft_Test.Controllers
         {
 
             var mamadi = new Mamadi();
-            var result = ClassExtension.GetDescription(mamadi);
+            var result = ClassBinding.GetDescription(mamadi);
             string viewbag = "";
             foreach (var item in result)
                 viewbag += $"{item.Property}: {item.Description} \n";
