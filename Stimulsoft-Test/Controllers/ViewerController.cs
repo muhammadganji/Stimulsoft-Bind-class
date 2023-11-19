@@ -22,26 +22,31 @@ namespace Stimulsoft_Test.Controllers
         public IActionResult Index()
         {
 
-            var mamadi = new Mamadi();
-            var result = ClassBinding.GetDescription(mamadi);
-            string viewbag = "";
-            foreach (var item in result)
-                viewbag += $"{item.Property}: {item.Description} \n";
-            ViewBag.Test = $"Start analyze: {viewbag}";
+            //var mamadi = new Mamadi();
+            //var result = ClassBinding.GetDescription(mamadi);
+            //string viewbag = "";
+            //foreach (var item in result)
+            //    viewbag += $"{item.Property}: {item.Description} \n";
+            //ViewBag.Test = $"Start analyze: {viewbag}";
             return View();
         }
 
         public IActionResult GetReport()
         {
             //return null;
-            var Address = "Reports/Report-Mamadi.mrt";
-            var mamadi = GetDataMamadi();
+            var Address = "Reports/Report_Generaljson.mrt";
+            var mamadi = GetDataMamadi(); //GetDataBase(); 
 
             // Create the report object
             var report = new StiReport();
+            //var modelBinding = ClassBinding.GetDescription(new Mamadi()); //ClassBinding.GetDescription(new Base());
+            //var classReport = new ClassReport();
+            //var jsonReport = classReport.GetAll(modelBinding);
+            //report.LoadFromJson(jsonReport);
+
             report.Load(StiNetCoreHelper.MapPath(this, Address));
             report.Compile();
-            report.RegData("Mamadi", mamadi);
+            report.RegData("dt", mamadi);
             return StiNetCoreViewer.GetReportResult(this, report);
 
         }
@@ -76,6 +81,34 @@ namespace Stimulsoft_Test.Controllers
         {
 
             return StiNetCoreViewer.ViewerEventResult(this);
+        }
+
+        public List<Base> GetDataBase()
+        {
+            return new List<Base>
+            {
+                new Base()
+                {
+                    Id= 1,
+                    FirstName = "Ehsan",
+                    LastName = "moridi",
+                    Birthday = "2023/09/09 14:15"
+                },
+                new Base()
+                {
+                    Id= 2,
+                    FirstName = "Ebi",
+                    LastName = "mori",
+                    Birthday = "2018/09/09 14:15"
+                },
+                new Base()
+                {
+                    Id= 2,
+                    FirstName = "Ensaf",
+                    LastName = "orii",
+                    Birthday = "2020/09/09 14:15"
+                }
+            };
         }
 
     }

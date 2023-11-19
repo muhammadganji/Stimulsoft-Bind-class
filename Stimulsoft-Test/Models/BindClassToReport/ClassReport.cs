@@ -9,10 +9,7 @@ public class ClassReport
     /// <returns>جیسون فایل استیمول سافت</returns>
     public string GetAll(List<Result> results)
     {
-        var result = @"""
-
-
-{
+        var result = @"{
   'ReportVersion': '2023.1.1.0',
   'ReportGuid': 'e436a74174d44dd2b6b9c627c07622d1',
   'ReportName': 'Report',
@@ -40,20 +37,11 @@ public class ClassReport
         'Alias': 'root',
         'Key': '0aa1eec61ae04b4b8f8e8182c444e5a9',
         'Columns': {
-          """
+          "
         + this.GetColumns(results) +
-    @"""
+    @"
         },
         'NameInSource': 'dt'
-      }
-    },
-    'Databases': {
-      '0': {
-        'Ident': 'StiJsonDatabase',
-        'Name': 'dt',
-        'Alias': 'dt',
-        'Key': 'c472b8f657804ef0bf6d340560342bed',
-        'PathData': 'C:\\Users\\Saba Pc 4\\Desktop\\json test stimulsoft.json'
       }
     }
   },
@@ -78,11 +66,11 @@ public class ClassReport
           'Border': ';;;;;;;solid:Black',
           'Brush': 'solid:',
           'Components': {
-"""
+"
 
      + this.GetComponents(results) +
 
-    @"""
+    @"
           }
         },
         '1': {
@@ -94,12 +82,12 @@ public class ClassReport
           },
           'Border': ';;;;;;;solid:Black',
           'Brush': 'solid:',
-          'Components': 
-                """
+          'Components': { 
+                "
 
     + this.GetComponentsData(results) +
 
-    @"""
+    @"    }
           },
           'DataSourceName': 'root'
         }
@@ -117,13 +105,12 @@ public class ClassReport
         'Bottom': 0.39
       }
     }
-  }
-}
+  }";
 
-
-            """;
-
-        return result.Replace("'", "\"");
+        result = result.Replace("'", "\"");
+        result = result.Replace("\"\"", "\"");
+        //result = result.Replace("}\"", "}");
+        return result;
 
     }
 
@@ -137,9 +124,9 @@ public class ClassReport
         {
             var temp = $"'{i}':" +
                 "{" +
-                $" 'Name': '{results[i].Property}', 'Index': -1, 'NameInSource': '{results[i].Property}', 'Alias': '{results[i].Description}', 'Type': 'System.String'" +
+                $"'Name': '{results[i].Property}', 'Index': -1, 'NameInSource': '{results[i].Property}', 'Alias': '{results[i].Description}', 'Type': 'System.String'" +
                 "}";
-            if ((i + 1) < results.Count) temp += ", ";
+            if (i < (results.Count - 1)) temp += ", ";
 
             cols += temp;
         }
@@ -178,7 +165,7 @@ public class ClassReport
             comps += temp;
         }
 
-        return comps;
+        return comps.Replace("\"","");
     }
 
     /// <summary>
@@ -222,23 +209,21 @@ public class ClassReport
             temp += $"'{i}':" + " { 'Ident': 'StiText'," +
                 $"'Name': 'Dataroot_{results[i].Property}__{results[i].Description}_', " +
                 $"'CanGrow': true," +
-                $" 'ClientRectangle': {this.GetClientRectangle(i, results.Count)}," +
+                $"'ClientRectangle': {this.GetClientRectangle(i, results.Count)}," +
                 "'Interaction': { 'Ident': 'StiInteraction' }, 'Text': { 'Value': '{" +
-                $"root.{results[i].Property}" +
-                @"""
-                    }' }, 'VertAlignment': 'Center',
-                    'Border': ';;;;;;;solid:Black',
-                    'Brush': 'solid:',
-                    'TextBrush': 'solid:Black',
-                     'TextOptions': {
-                    'WordWrap': true } }
-                """;
+                $"root.{results[i].Property}" + "}' }, 'VertAlignment': 'Center', " +
+                "'Border': ';;;;;;;solid:Black'," +
+                "'Brush': 'solid:'," +
+                "'TextBrush': 'solid:Black'," +
+                "'TextOptions': {" +
+                "'WordWrap': true } }";
+
             if (i < (results.Count - 1)) { temp += ", "; }
 
             comps += temp;
         }
 
-        return comps;
+        return comps.Replace("\"", "");
     }
 
 }

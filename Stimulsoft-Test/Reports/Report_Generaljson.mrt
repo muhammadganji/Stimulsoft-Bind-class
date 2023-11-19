@@ -1,10 +1,10 @@
 {
   "ReportVersion": "2023.1.1.0",
-  "ReportGuid": "e436a74174d44dd2b6b9c627c07622d1",
+  "ReportGuid": "b604163553f6495aac1db23d588f2389",
   "ReportName": "Report",
   "ReportAlias": "Report",
-  "ReportCreated": "/Date(1700290115000+0330)/",
-  "ReportChanged": "/Date(1700295989252+0330)/",
+  "ReportCreated": "/Date(1700392348000+0330)/",
+  "ReportChanged": "/Date(1700392430459+0330)/",
   "EngineVersion": "EngineV2",
   "ReportUnit": "Inches",
   "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
@@ -21,50 +21,41 @@
   "Dictionary": {
     "DataSources": {
       "0": {
-        "Ident": "StiDataTableSource",
-        "Name": "root",
-        "Alias": "root",
-        "Key": "0aa1eec61ae04b4b8f8e8182c444e5a9",
+        "Ident": "StiBusinessObjectSource",
+        "Name": "mamad",
+        "Alias": "mamad",
+        "Key": "9014d691a4374f5a920438eacca8f7bb",
         "Columns": {
           "0": {
-            "Name": "Title",
+            "Name": "Id",
             "Index": -1,
-            "NameInSource": "Title",
-            "Alias": "عنوان",
+            "NameInSource": "Id",
+            "Alias": "شناسه",
             "Type": "System.String"
           },
           "1": {
-            "Name": "TypeExam",
+            "Name": "FirstName",
             "Index": -1,
-            "NameInSource": "TypeExam",
-            "Alias": "نوع آزمون",
+            "NameInSource": "FirstName",
+            "Alias": "نام",
             "Type": "System.String"
           },
           "2": {
-            "Name": "DateCreated",
+            "Name": "LastName",
             "Index": -1,
-            "NameInSource": "DateCreated",
-            "Alias": "تاریخ",
+            "NameInSource": "LastName",
+            "Alias": "نام خانوادگی",
             "Type": "System.String"
           },
           "3": {
-            "Name": "Score",
+            "Name": "Birthday",
             "Index": -1,
-            "NameInSource": "Score",
-            "Alias": "بارم",
+            "NameInSource": "Birthday",
+            "Alias": "تاریخ",
             "Type": "System.String"
           }
         },
         "NameInSource": "dt"
-      }
-    },
-    "Databases": {
-      "0": {
-        "Ident": "StiJsonDatabase",
-        "Name": "dt",
-        "Alias": "dt",
-        "Key": "c472b8f657804ef0bf6d340560342bed",
-        "PathData": "C:\\Users\\Saba Pc 4\\Desktop\\json test stimulsoft.json"
       }
     }
   },
@@ -72,7 +63,7 @@
     "0": {
       "Ident": "StiPage",
       "Name": "Page1",
-      "Guid": "1f1c57ed72fb4f348efd0ee4b95cdd2b",
+      "Guid": "e212279f07614dce8403e9d51389e29d",
       "Interaction": {
         "Ident": "StiInteraction"
       },
@@ -81,7 +72,7 @@
       "Components": {
         "0": {
           "Ident": "StiHeaderBand",
-          "Name": "Headerroot",
+          "Name": "Headermamad",
           "ClientRectangle": "0,0.2,7.72,0.3",
           "Interaction": {
             "Ident": "StiInteraction"
@@ -91,13 +82,13 @@
           "Components": {
             "0": {
               "Ident": "StiText",
-              "Name": "Headerroot_Title__عنوان_",
+              "Name": "Headermamad_Id__شناسه_",
               "ClientRectangle": "0,0,1.9,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "عنوان"
+                "Value": "شناسه"
               },
               "VertAlignment": "Center",
               "Font": ";10;Bold;",
@@ -110,13 +101,13 @@
             },
             "1": {
               "Ident": "StiText",
-              "Name": "Headerroot_TypeExam__نوع_آزمون_",
+              "Name": "Headermamad_FirstName__نام_",
               "ClientRectangle": "1.9,0,1.9,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "نوع آزمون"
+                "Value": "نام"
               },
               "VertAlignment": "Center",
               "Font": ";10;Bold;",
@@ -129,8 +120,27 @@
             },
             "2": {
               "Ident": "StiText",
-              "Name": "Headerroot_DateCreated__تاریخ_",
+              "Name": "Headermamad_LastName__نام_خانوادگی_",
               "ClientRectangle": "3.8,0,1.9,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "نام خانوادگی"
+              },
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Headermamad_Birthday__تاریخ_",
+              "ClientRectangle": "5.7,0,2,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -145,31 +155,12 @@
               "TextOptions": {
                 "WordWrap": true
               }
-            },
-            "3": {
-              "Ident": "StiText",
-              "Name": "Headerroot_Score__بارم_",
-              "ClientRectangle": "5.7,0,2,0.3",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "بارم"
-              },
-              "VertAlignment": "Center",
-              "Font": ";10;Bold;",
-              "Border": ";;;;;;;solid:Black",
-              "Brush": "solid:",
-              "TextBrush": "solid:Black",
-              "TextOptions": {
-                "WordWrap": true
-              }
             }
           }
         },
         "1": {
           "Ident": "StiDataBand",
-          "Name": "Dataroot",
+          "Name": "Datamamad",
           "ClientRectangle": "0,0.9,7.72,0.3",
           "Interaction": {
             "Ident": "StiBandInteraction"
@@ -179,14 +170,14 @@
           "Components": {
             "0": {
               "Ident": "StiText",
-              "Name": "Dataroot_Title__عنوان_",
+              "Name": "Datamamad_Id__شناسه_",
               "CanGrow": true,
               "ClientRectangle": "0,0,1.9,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{root.Title}"
+                "Value": "{mamad.Id}"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
@@ -198,14 +189,14 @@
             },
             "1": {
               "Ident": "StiText",
-              "Name": "Dataroot_TypeExam__نوع_آزمون_",
+              "Name": "Datamamad_FirstName__نام_",
               "CanGrow": true,
               "ClientRectangle": "1.9,0,1.9,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{root.TypeExam}"
+                "Value": "{mamad.FirstName}"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
@@ -217,14 +208,14 @@
             },
             "2": {
               "Ident": "StiText",
-              "Name": "Dataroot_DateCreated__تاریخ_",
+              "Name": "Datamamad_LastName__نام_خانوادگی_",
               "CanGrow": true,
               "ClientRectangle": "3.8,0,1.9,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{root.DateCreated}"
+                "Value": "{mamad.LastName}"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
@@ -236,14 +227,14 @@
             },
             "3": {
               "Ident": "StiText",
-              "Name": "Dataroot_Score__بارم_",
+              "Name": "Datamamad_Birthday__تاریخ_",
               "CanGrow": true,
               "ClientRectangle": "5.7,0,2,0.3",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{root.Score}"
+                "Value": "{mamad.Birthday}"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
@@ -254,7 +245,7 @@
               }
             }
           },
-          "DataSourceName": "root"
+          "DataSourceName": "mamad"
         }
       },
       "PaperSize": "Letter",
