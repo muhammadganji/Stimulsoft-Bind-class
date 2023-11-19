@@ -1,13 +1,15 @@
-﻿using Stimulsoft.Report;
-using static Reports.Report;
-
-namespace Stimulsoft_Test.Models.BindClassToReport;
+﻿namespace Stimulsoft_Test.Models.BindClassToReport;
 
 public class ClassReport
 {
+    /// <summary>
+    /// بایند مدل در جیسون
+    /// </summary>
+    /// <param name="results">استراکچر مدل</param>
+    /// <returns>جیسون فایل استیمول سافت</returns>
     public string GetAll(List<Result> results)
     {
-        return @"""
+        var result = @"""
 
 
 {
@@ -76,13 +78,11 @@ public class ClassReport
           'Border': ';;;;;;;solid:Black',
           'Brush': 'solid:',
           'Components': {
-            
 """
 
      + this.GetComponents(results) +
 
-@"""
-
+    @"""
           }
         },
         '1': {
@@ -94,83 +94,12 @@ public class ClassReport
           },
           'Border': ';;;;;;;solid:Black',
           'Brush': 'solid:',
-          'Components': {
-            '0': {
-              'Ident': 'StiText',
-              'Name': 'Dataroot_Title__عنوان_',
-              'CanGrow': true,
-              'ClientRectangle': '0,0,1.9,0.3',
-              'Interaction': {
-                'Ident': 'StiInteraction'
-              },
-              'Text': {
-                'Value': '{root.Title}'
-              },
-              'VertAlignment': 'Center',
-              'Border': ';;;;;;;solid:Black',
-              'Brush': 'solid:',
-              'TextBrush': 'solid:Black',
-              'TextOptions': {
-                'WordWrap': true
-              }
-            },
-            '1': {
-              'Ident': 'StiText',
-              'Name': 'Dataroot_TypeExam__نوع_آزمون_',
-              'CanGrow': true,
-              'ClientRectangle': '1.9,0,1.9,0.3',
-              'Interaction': {
-                'Ident': 'StiInteraction'
-              },
-              'Text': {
-                'Value': '{root.TypeExam}'
-              },
-              'VertAlignment': 'Center',
-              'Border': ';;;;;;;solid:Black',
-              'Brush': 'solid:',
-              'TextBrush': 'solid:Black',
-              'TextOptions': {
-                'WordWrap': true
-              }
-            },
-            '2': {
-              'Ident': 'StiText',
-              'Name': 'Dataroot_DateCreated__تاریخ_',
-              'CanGrow': true,
-              'ClientRectangle': '3.8,0,1.9,0.3',
-              'Interaction': {
-                'Ident': 'StiInteraction'
-              },
-              'Text': {
-                'Value': '{root.DateCreated}'
-              },
-              'VertAlignment': 'Center',
-              'Border': ';;;;;;;solid:Black',
-              'Brush': 'solid:',
-              'TextBrush': 'solid:Black',
-              'TextOptions': {
-                'WordWrap': true
-              }
-            },
-            '3': {
-              'Ident': 'StiText',
-              'Name': 'Dataroot_Score__بارم_',
-              'CanGrow': true,
-              'ClientRectangle': '5.7,0,2,0.3',
-              'Interaction': {
-                'Ident': 'StiInteraction'
-              },
-              'Text': {
-                'Value': '{root.Score}'
-              },
-              'VertAlignment': 'Center',
-              'Border': ';;;;;;;solid:Black',
-              'Brush': 'solid:',
-              'TextBrush': 'solid:Black',
-              'TextOptions': {
-                'WordWrap': true
-              }
-            }
+          'Components': 
+                """
+
+    + this.GetComponentsData(results) +
+
+    @"""
           },
           'DataSourceName': 'root'
         }
@@ -194,12 +123,14 @@ public class ClassReport
 
             """;
 
+        return result.Replace("'", "\"");
+
     }
 
     /// <summary>
-    /// دریافت ستون ها
+    /// مدل
     /// </summary>
-    public string GetColumns(List<Result> results)
+    private string GetColumns(List<Result> results)
     {
         string cols = "";
         for (int i = 0; i < results.Count; i++)
@@ -215,7 +146,12 @@ public class ClassReport
         return cols;
     }
 
-    public string GetComponents(List<Result> results)
+    /// <summary>
+    /// عنوان جدول
+    /// </summary>
+    /// <param name="results">مدل</param>
+    /// <returns>header of table</returns>
+    private string GetComponents(List<Result> results)
     {
         string comps = "";
 
@@ -224,37 +160,35 @@ public class ClassReport
             string temp = $"'{i}' :" + " { ";
             temp += "'Ident': 'StiText', ";
             temp += $"'Name': 'Headerroot_{results[i].Property}__{results[i].Description}_' ,";
-            temp += $"'ClientRectangle' : '{}',";
-            /*
+            temp += $"'ClientRectangle' : {GetClientRectangle(i, results.Count)},";
+            temp += "'Interaction': { 'Ident': 'StiInteraction' }, 'Text': { ";
+            temp += $"'Value': '{results[i].Description}'";
+            temp += @""" },
+                'VertAlignment': 'Center',
+              'Font': ';10;Bold;',
+              'Border': ';;;;;;;solid:Black',
+              'Brush': 'solid:',
+              'TextBrush': 'solid:Black',
+              'TextOptions': {
+                'WordWrap': true
+                }
+               }""";
+            if (i < (results.Count - 1)) temp += ", ";
 
-
-              "ClientRectangle": "0,0,1.9,0.3",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "عنوان"
-              },
-              "VertAlignment": "Center",
-              "Font": ";10;Bold;",
-              "Border": ";;;;;;;solid:Black",
-              "Brush": "solid:",
-              "TextBrush": "solid:Black",
-              "TextOptions": {
-                "WordWrap": true
-              }
-            },
-             */
-
-
+            comps += temp;
         }
 
-        return """
-
-            """;
+        return comps;
     }
 
-    public string GetClientRectangle(int index, int columns, int total = 8)
+    /// <summary>
+    /// ترسیم موقعیت عنوان
+    /// </summary>
+    /// <param name="index">چندمین مدل</param>
+    /// <param name="columns">تعداد ستون های مدل</param>
+    /// <param name="total">ابعاد برگه به اینچ</param>
+    /// <returns>'5.7	,0	,2	    ,0.3'</returns>
+    private string GetClientRectangle(int index, int columns, int total = 8)
     {
 
         /*
@@ -267,26 +201,46 @@ public class ClassReport
          */
         double result = (double)total / columns;  // تبدیل total به نوع double برای دقت بیشتر در تقسیم
         double unit = Math.Round(result, 1, MidpointRounding.ToEven);
-        return  $"'{((double)index * unit)},0,{unit},0.3'";
-        
+        return $"'{((double)index * unit)},0,{unit},0.3'";
+
 
 
     }
 
-    public string GetFooter()
+    /// <summary>
+    /// سطرهای جدول
+    /// </summary>
+    /// <param name="results">مدل</param>
+    /// <returns>rows of table</returns>
+    private string GetComponentsData(List<Result> results)
     {
-        return """
+        string comps = "";
 
-            """;
+        for (int i = 0; i < results.Count; i++)
+        {
+            string temp = "";
+            temp += $"'{i}':" + " { 'Ident': 'StiText'," +
+                $"'Name': 'Dataroot_{results[i].Property}__{results[i].Description}_', " +
+                $"'CanGrow': true," +
+                $" 'ClientRectangle': {this.GetClientRectangle(i, results.Count)}," +
+                "'Interaction': { 'Ident': 'StiInteraction' }, 'Text': { 'Value': '{" +
+                $"root.{results[i].Property}" +
+                @"""
+                    }' }, 'VertAlignment': 'Center',
+                    'Border': ';;;;;;;solid:Black',
+                    'Brush': 'solid:',
+                    'TextBrush': 'solid:Black',
+                     'TextOptions': {
+                    'WordWrap': true } }
+                """;
+            if (i < (results.Count - 1)) { temp += ", "; }
+
+            comps += temp;
+        }
+
+        return comps;
     }
 
-    public string GetResult()
-    {
-        return $"""
-                        
-
-            """;
-    }
 }
 
 
