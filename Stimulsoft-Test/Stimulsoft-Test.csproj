@@ -8,21 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Reports\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="stimulsoft.reports.engine.netcore" Version="2023.1.1">
       <PrivateAssets></PrivateAssets>
       <GeneratePathProperty></GeneratePathProperty>
     </PackageReference>
     <PackageReference Include="stimulsoft.reports.web.netcore" Version="2023.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Reports\Report-Mamadi.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

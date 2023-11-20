@@ -11,11 +11,11 @@ public class ClassReport
     {
         var result = @"{
   'ReportVersion': '2023.1.1.0',
-  'ReportGuid': 'e436a74174d44dd2b6b9c627c07622d1',
+  'ReportGuid': '4d275a2ecf294646b841336055884912',
   'ReportName': 'Report',
   'ReportAlias': 'Report',
-  'ReportCreated': '/Date(1700290115000+0330)/',
-  'ReportChanged': '/Date(1700295989252+0330)/',
+  'ReportCreated': '/Date(1700461387000+0330)/',
+  'ReportChanged': '/Date(1700463560122+0330)/',
   'EngineVersion': 'EngineV2',
   'ReportUnit': 'Inches',
   'Script': 'using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n',
@@ -32,80 +32,76 @@ public class ClassReport
   'Dictionary': {
     'DataSources': {
       '0': {
-        'Ident': 'StiDataTableSource',
-        'Name': 'root',
-        'Alias': 'root',
-        'Key': '0aa1eec61ae04b4b8f8e8182c444e5a9',
+        'Ident': 'StiBusinessObjectSource',
+        'Name': 'mamad',
+        'Alias': 'mamad',
+        'Key': 'fdcc09ef29f146da83b81e7b94679acd',
         'Columns': {
           "
         + this.GetColumns(results) +
-    @"
-        },
+    @"},
         'NameInSource': 'dt'
       }
     }
   },
   'Pages': {
-    '0': {
-      'Ident': 'StiPage',
-      'Name': 'Page1',
-      'Guid': '1f1c57ed72fb4f348efd0ee4b95cdd2b',
-      'Interaction': {
-        'Ident': 'StiInteraction'
-      },
-      'Border': ';;2;;;;;solid:Black',
-      'Brush': 'solid:',
-      'Components': {
-        '0': {
-          'Ident': 'StiHeaderBand',
-          'Name': 'Headerroot',
-          'ClientRectangle': '0,0.2,7.72,0.3',
-          'Interaction': {
-            'Ident': 'StiInteraction'
-          },
-          'Border': ';;;;;;;solid:Black',
-          'Brush': 'solid:',
-          'Components': {
+  '0': {
+    'Ident': 'StiPage',
+    'Name': 'Page1',
+    'Guid': 'a4ecc6560ccc41e39d075559cce32f3b',
+    'Interaction': {
+      'Ident': 'StiInteraction'
+    },
+    'Border': ';;2;;;;;solid:Black',
+    'Brush': 'solid:',
+    'Components': {
+      '0': {
+        'Ident': 'StiHeaderBand',
+        'Name': 'Headermamad',
+        'ClientRectangle': '0,0.2,7.72,0.3',
+        'Interaction': {
+          'Ident': 'StiInteraction'
+        },
+        'Border': ';;;;;;;solid:Black',
+        'Brush': 'solid:',
+        'Components': {
 "
 
      + this.GetComponents(results) +
 
-    @"
-          }
+    @" }
+        }, '1': {
+        'Ident': 'StiDataBand',
+        'Name': 'Datamamad',
+        'ClientRectangle': '0,0.9,7.72,0.3',
+        'Interaction': {
+          'Ident': 'StiBandInteraction'
         },
-        '1': {
-          'Ident': 'StiDataBand',
-          'Name': 'Dataroot',
-          'ClientRectangle': '0,0.9,7.72,0.3',
-          'Interaction': {
-            'Ident': 'StiBandInteraction'
-          },
-          'Border': ';;;;;;;solid:Black',
-          'Brush': 'solid:',
-          'Components': { 
-                "
+        'Border': ';;;;;;;solid:Black',
+        'Brush': 'solid:',
+        'Components': { "
 
     + this.GetComponentsData(results) +
 
-    @"    }
-          },
-          'DataSourceName': 'root'
-        }
-      },
-      'PaperSize': 'Letter',
-      'PageWidth': 8.5,
-      'PageHeight': 11.0,
-      'Watermark': {
+    @"},
+        'DataSourceName': 'mamad'
+       }
+        },
+        'PaperSize': 'Letter',
+        'PageWidth': 8.5,
+        'PageHeight': 11.0,
+        'Watermark': {
         'TextBrush': 'solid:50,0,0,0'
-      },
-      'Margins': {
+        },
+        'Margins': {
         'Left': 0.39,
         'Right': 0.39,
         'Top': 0.39,
         'Bottom': 0.39
+        }
+       }
       }
-    }
-  }";
+     }";
 
         result = result.Replace("'", "\"");
         result = result.Replace("\"\"", "\"");
@@ -119,16 +115,26 @@ public class ClassReport
     /// </summary>
     private string GetColumns(List<Result> results)
     {
-        string cols = "";
+        var cols = string.Empty;
         for (int i = 0; i < results.Count; i++)
         {
-            var temp = $"'{i}':" +
+            var temp = string.Empty;
+            temp = $"'{i}':" +
                 "{" +
                 $"'Name': '{results[i].Property}', 'Index': -1, 'NameInSource': '{results[i].Property}', 'Alias': '{results[i].Description}', 'Type': 'System.String'" +
                 "}";
             if (i < (results.Count - 1)) temp += ", ";
 
             cols += temp;
+            /*
+             "0": {
+            "Name": "Id",
+            "Index": -1,
+            "NameInSource": "Id",
+            "Alias": "شناسه",
+            "Type": "System.String"
+          },
+             */
         }
         return cols;
     }
@@ -140,32 +146,55 @@ public class ClassReport
     /// <returns>header of table</returns>
     private string GetComponents(List<Result> results)
     {
-        string comps = "";
+        var comps = string.Empty;
 
         for (int i = 0; i < results.Count; i++)
         {
-            string temp = $"'{i}' :" + " { ";
+            var temp = string.Empty;
+            temp = $"'{i}' :" + " { ";
             temp += "'Ident': 'StiText', ";
-            temp += $"'Name': 'Headerroot_{results[i].Property}__{results[i].Description}_' ,";
-            temp += $"'ClientRectangle' : {GetClientRectangle(i, results.Count)},";
+            temp += $"'Name': 'Headermamad_{results[i].Property}__{results[i].Description}_' ,";
+            temp += $"'ClientRectangle': {GetClientRectangle(i, results.Count)},";
             temp += "'Interaction': { 'Ident': 'StiInteraction' }, 'Text': { ";
             temp += $"'Value': '{results[i].Description}'";
-            temp += @""" },
-                'VertAlignment': 'Center',
-              'Font': ';10;Bold;',
-              'Border': ';;;;;;;solid:Black',
-              'Brush': 'solid:',
-              'TextBrush': 'solid:Black',
-              'TextOptions': {
-                'WordWrap': true
-                }
-               }""";
+            temp += @"},
+                        'VertAlignment': 'Center',
+                        'Font': ';10;Bold;',
+                        'Border': ';;;;;;;solid:Black',
+                        'Brush': 'solid:',
+                        'TextBrush': 'solid:Black',
+                        'TextOptions': {
+                        'WordWrap': true
+                        }
+                    }  ";
             if (i < (results.Count - 1)) temp += ", ";
 
             comps += temp;
+
+            /*
+              '0': {
+                    'Ident': 'StiText',
+                    'Name': 'Headermamad_Id__شناسه_',
+                    'ClientRectangle': '0,0,2.6,0.3',
+                    'Interaction': {
+                      'Ident': 'StiInteraction'
+                    },
+                    'Text': {
+                      'Value': 'شناسه'
+                    },
+                    'VertAlignment': 'Center',
+                    'Font': ';10;Bold;',
+                    'Border': ';;;;;;;solid:Black',
+                    'Brush': 'solid:',
+                    'TextBrush': 'solid:Black',
+                    'TextOptions': {
+                      'WordWrap': true
+                    }
+               },
+             */
         }
 
-        return comps.Replace("\"","");
+        return comps.Replace("\"", "");
     }
 
     /// <summary>
@@ -177,6 +206,10 @@ public class ClassReport
     /// <returns>'5.7	,0	,2	    ,0.3'</returns>
     private string GetClientRectangle(int index, int columns, int total = 8)
     {
+        double result = (double)total / columns;  // تبدیل total به نوع double برای دقت بیشتر در تقسیم
+        double unit = Math.Round(result, 1, MidpointRounding.ToEven);
+        return $"'{((double)index * unit)},0,{unit},0.3'";
+
 
         /*
          "ClientRectangle": "0		,0	,1.9	,0.3",
@@ -186,11 +219,6 @@ public class ClassReport
 
         columns: 4 		unit: 1.9
          */
-        double result = (double)total / columns;  // تبدیل total به نوع double برای دقت بیشتر در تقسیم
-        double unit = Math.Round(result, 1, MidpointRounding.ToEven);
-        return $"'{((double)index * unit)},0,{unit},0.3'";
-
-
 
     }
 
@@ -201,26 +229,53 @@ public class ClassReport
     /// <returns>rows of table</returns>
     private string GetComponentsData(List<Result> results)
     {
-        string comps = "";
+        var comps = string.Empty;
 
         for (int i = 0; i < results.Count; i++)
         {
-            string temp = "";
+            var temp = string.Empty;
             temp += $"'{i}':" + " { 'Ident': 'StiText'," +
-                $"'Name': 'Dataroot_{results[i].Property}__{results[i].Description}_', " +
-                $"'CanGrow': true," +
-                $"'ClientRectangle': {this.GetClientRectangle(i, results.Count)}," +
-                "'Interaction': { 'Ident': 'StiInteraction' }, 'Text': { 'Value': '{" +
-                $"root.{results[i].Property}" + "}' }, 'VertAlignment': 'Center', " +
-                "'Border': ';;;;;;;solid:Black'," +
-                "'Brush': 'solid:'," +
-                "'TextBrush': 'solid:Black'," +
-                "'TextOptions': {" +
-                "'WordWrap': true } }";
+                $"'Name': 'Datamamad_{results[i].Property}__{results[i].Description}_', " +
+                "'CanGrow': true," +
+                $"'ClientRectangle': {this.GetClientRectangle(i, results.Count)}, " +
+                "'Interaction': { 'Ident': 'StiInteraction' }, " +
+                "'Text': { 'Value': '{" +
+                $"mamad.{results[i].Property}" + "}' }, " +
+                @"
+                  'VertAlignment': 'Center',
+                  'Border': ';;;;;;;solid:Black',
+                  'Brush': 'solid:',
+                  'TextBrush': 'solid:Black',
+                  'TextOptions': {
+                  'WordWrap': true
+                  }
+                 }";
 
             if (i < (results.Count - 1)) { temp += ", "; }
 
             comps += temp;
+
+            /*
+            '0': {
+              'Ident': 'StiText',
+              'Name': 'Datamamad_Id__شناسه_',
+              'CanGrow': true,
+              'ClientRectangle': '0,0,2.6,0.3',
+              'Interaction': {
+                'Ident': 'StiInteraction'
+              },
+              'Text': {
+                'Value': '{mamad.Id}'
+              },
+              'VertAlignment': 'Center',
+              'Border': ';;;;;;;solid:Black',
+              'Brush': 'solid:',
+              'TextBrush': 'solid:Black',
+              'TextOptions': {
+                'WordWrap': true
+              }
+            },
+             */
         }
 
         return comps.Replace("\"", "");

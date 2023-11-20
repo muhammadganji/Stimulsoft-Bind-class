@@ -31,23 +31,19 @@ namespace Stimulsoft_Test.Controllers
             return View();
         }
 
+        /// <summary>
+        /// گزارش ساز
+        /// </summary>
+        /// <returns></returns>
         public IActionResult GetReport()
         {
-            //return null;
-            var Address = "Reports/Report_Generaljson.mrt";
-            var mamadi = GetDataMamadi(); //GetDataBase(); 
-
-            // Create the report object
-            var report = new StiReport();
-            //var modelBinding = ClassBinding.GetDescription(new Mamadi()); //ClassBinding.GetDescription(new Base());
-            //var classReport = new ClassReport();
-            //var jsonReport = classReport.GetAll(modelBinding);
-            //report.LoadFromJson(jsonReport);
-
-            report.Load(StiNetCoreHelper.MapPath(this, Address));
-            report.Compile();
-            report.RegData("dt", mamadi);
-            return StiNetCoreViewer.GetReportResult(this, report);
+            var data = GetDataMamadi(); //GetDataBase(); 
+            var stimul = new StiReport();
+            var jsonReport = GetFormatReport(new Mamadi());
+            stimul.LoadFromString(jsonReport);
+            stimul.Compile();
+            stimul.RegData("dt", data);
+            return StiNetCoreViewer.GetReportResult(this, stimul);
 
         }
 
@@ -109,6 +105,20 @@ namespace Stimulsoft_Test.Controllers
                     Birthday = "2020/09/09 14:15"
                 }
             };
+        }
+
+        /// <summary>
+        /// قالب استیمول سافت
+        /// </summary>
+        /// <typeparam name="T">کلاس</typeparam>
+        /// <param name="obj">نوع کلاس</param>
+        /// <returns>قالب جیسون</returns>
+        private string GetFormatReport<T>(T obj)
+        {
+            var modelBinding = ClassBinding.GetDescription(obj);
+            var classReport = new ClassReport();
+            var jsonReport = classReport.GetAll(modelBinding);
+            return jsonReport;
         }
 
     }
