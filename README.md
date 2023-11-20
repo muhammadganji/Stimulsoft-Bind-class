@@ -1,6 +1,12 @@
 # Stimulsoft-binding property
 Automation binding property of the class to report in `.net7` and `stimulsoft 2023`
 
+- [linkdin author](https://linkedin.com/in/muhammad-ganji-nezhad)
+- november 2023
+
+![screen of program](https://github.com/muhammadganji/Stimulsoft-Bind-class/blob/master/Screenshot%202023-11-20%20131640.png)
+<br/>Screen of program<br/>
+
 ## document of technical
 in the `ViewerController` you can change model and data to create report.
 this project depend on `ClassBinding` and `ClassReport`for bind class and data.
